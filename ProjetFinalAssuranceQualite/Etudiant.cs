@@ -39,14 +39,14 @@ namespace ProjetFinalAssuranceQualite
     }
     
     public static void RechercheEtudiant(int numeroEtudiantRechercher)
+    {
+		foreach (Etudiant etudiant in Program.ListEtudiants)
 		{
-			foreach (Etudiant etudiant in Program.ListEtudiants)
+			if (etudiant.NumeroEtudiant == numeroEtudiantRechercher)
 			{
-				if (etudiant.NumeroEtudiant == numeroEtudiantRechercher)
-				{
-					Console.WriteLine(etudiant.ToString());
-				}
+				Console.WriteLine(etudiant.ToString());
 			}
+		}
     }
-	}
+  }
 }
