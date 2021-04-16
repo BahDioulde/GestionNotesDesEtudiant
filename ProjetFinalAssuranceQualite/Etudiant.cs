@@ -8,5 +8,15 @@ namespace ProjetFinalAssuranceQualite
 {
 	class Etudiant
 	{
+		public static void RechercheEtudiant(int numeroEtudiantRechercher)
+		{
+			foreach (Etudiant etudiant in Program.ListEtudiants)
+			{
+				if (etudiant.NumeroEtudiant == numeroEtudiantRechercher)
+				{
+					Console.WriteLine(etudiant.ToString());
+				}
+			}
+		}
 	}
 }
