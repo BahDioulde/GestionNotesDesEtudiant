@@ -10,8 +10,7 @@ public class Program
 	{
 		static void Main(string[] args)
 		{
-
-		static Etudiant etudiant;
+  	static Etudiant etudiant;
 		public static List<Etudiant> ListEtudiants = new List<Etudiant>();
 		public static List<Note> ListeNotesEtudiant = new List<Note>();
 		public static List<Cours> ListDesCours = new List<Cours>();
@@ -52,7 +51,34 @@ public class Program
             choixDuMenu = VerifierLaSaisieEntier();
           } while (choixDuMenu < 1);
 			}
+	public static void EnregistrerEtudiant()
+		{
+			
+			string reponseChoisie = "O";
+			int numeroEtudiant;
+			do
+			{
+				Console.Clear();
+                Console.WriteLine("\t***** Inscription des etudiants *****");
+				Console.Write("\n\tNumero de l'etudiant : ");
+				numeroEtudiant = VerifierLaSaisieEntier();
+				if (numeroEtudiant < 1)
+					continue;
+				Console.Write("\tNom de l'etudiant : ");
+				string nomEtudiant = Console.ReadLine();
+				Console.Write("\tPrenom de l'etudiant : ");
+				string prenomEtudiant = Console.ReadLine();
 
+				etudiant = new Etudiant(numeroEtudiant, nomEtudiant, prenomEtudiant);
+				ListEtudiants.Add(etudiant);
+				do
+				{
+					Console.Write("\tvoulez vous continuer L'ENREGISTREMENT O/N ? : ");
+					reponseChoisie = Console.ReadLine();
+				} while (reponseChoisie.ToUpper().Substring(0) != "N" && reponseChoisie.ToUpper().Substring(0) != "O");
+
+			} while (reponseChoisie.ToUpper().Substring(0) == "O");
+		}
 		}
 	}
 }
