@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetFinalAssuranceQualite
 {
+
   public class Etudiant
 	
 	{  
@@ -25,7 +26,7 @@ namespace ProjetFinalAssuranceQualite
 		}
     
     public static void AfficherListeEtudiant(List<Etudiant> listeEtudiants)
-     {
+    {
        if (listeEtudiants.Count < 1)
        {
           Console.WriteLine("Aucun etudiant disponible dans votre base de donnee\n");
@@ -34,6 +35,18 @@ namespace ProjetFinalAssuranceQualite
         {
           Console.WriteLine(etud.ToString());
         }
+      
     }
-	}
+    
+    public static void RechercheEtudiant(int numeroEtudiantRechercher)
+    {
+		foreach (Etudiant etudiant in Program.ListEtudiants)
+		{
+			if (etudiant.NumeroEtudiant == numeroEtudiantRechercher)
+			{
+				Console.WriteLine(etudiant.ToString());
+			}
+		}
+    }
+  }
 }
