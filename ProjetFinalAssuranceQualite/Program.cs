@@ -8,8 +8,31 @@ namespace ProjetFinalAssuranceQualite
 {
 	class Program
 	{
-		static void Main(string[] args)
+		
+		public static Etudiant VerificationNumeroEtudiant(int numeroEtudiant)
 		{
+			foreach (Etudiant etudiant in ListEtudiants)
+			{
+				if (etudiant.NumeroEtudiant == numeroEtudiant)
+				{
+					return etudiant;
+				}
+			}
+			return null;
 		}
+
+
+		public static Cours VerificationNumeroCours(int numeroCours)
+		{
+			foreach (Cours cours in ListDesCours)
+			{
+				if (cours.NumeroCours == numeroCours)
+				{
+					return cours;
+				}
+			}
+			return null;
+		}
+	  
 	}
 }
