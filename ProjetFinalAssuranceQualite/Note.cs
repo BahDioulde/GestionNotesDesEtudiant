@@ -8,6 +8,7 @@ namespace ProjetFinalAssuranceQualite
 {
 	class Note
 	{
+		  
 		public int NumeroEtudiant { get; set; }
 		public int NumeroCours { get; set; }
 		private double laNote;
@@ -24,5 +25,27 @@ namespace ProjetFinalAssuranceQualite
 		{
 			return "\tNote : " + this.LaNote;
 		}
+    
+    static double sommeDeNote = 0;
+		static int compteurNote=0;
+		public static void RechercheNoteEtudiant(int numeroEtudiantRechercher)
+		{
+			Etudiant.RechercheEtudiant(numeroEtudiantRechercher);
+			foreach (Note note in Program.ListeNotesEtudiant)
+			{
+				if (note.NumeroEtudiant== numeroEtudiantRechercher)
+				{
+					Cours.RechercherCours(note.NumeroCours);
+					Console.WriteLine(note.ToString());
+					sommeDeNote+=note.LaNote;
+					compteurNote++;
+				}
+			}
+		}
+
+		public static double CalculerMoyenne()
+		{
+			return sommeDeNote / compteurNote;
+    }
 	}
 }
