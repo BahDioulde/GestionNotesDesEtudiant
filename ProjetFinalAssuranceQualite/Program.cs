@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProjetFinalAssuranceQualite
 {
-public class Program
+  public class Program
 	{
-		static void Main(string[] args)
-		{
   	static Etudiant etudiant;
 		public static List<Etudiant> ListEtudiants = new List<Etudiant>();
 		public static List<Note> ListeNotesEtudiant = new List<Note>();
@@ -38,20 +36,21 @@ public class Program
 
 		}
 
-			public static void Menu()
-			{
-          Console.Clear();
-          Console.WriteLine("1. Gestion des etudiants ");
-          Console.WriteLine("2. Enregistrement Cours");
-          Console.WriteLine("3. Enregistrement Notes");
-          Console.WriteLine("4. Afficher Etudiants ");
-          Console.WriteLine("5. Rechercher un releve");
-          do
-          {
-            choixDuMenu = VerifierLaSaisieEntier();
-          } while (choixDuMenu < 1);
-			}
-	public static void EnregistrerEtudiant()
+    public static void Menu()
+    {
+        Console.Clear();
+        Console.WriteLine("1. Gestion des etudiants ");
+        Console.WriteLine("2. Enregistrement Cours");
+        Console.WriteLine("3. Enregistrement Notes");
+        Console.WriteLine("4. Afficher Etudiants ");
+        Console.WriteLine("5. Rechercher un releve");
+        do
+        {
+          choixDuMenu = VerifierLaSaisieEntier();
+        } while (choixDuMenu < 1);
+    }
+    
+	  public static void EnregistrerEtudiant()
 		{
 			
 			string reponseChoisie = "O";
@@ -71,14 +70,39 @@ public class Program
 
 				etudiant = new Etudiant(numeroEtudiant, nomEtudiant, prenomEtudiant);
 				ListEtudiants.Add(etudiant);
-				do
-				{
-					Console.Write("\tvoulez vous continuer L'ENREGISTREMENT O/N ? : ");
-					reponseChoisie = Console.ReadLine();
-				} while (reponseChoisie.ToUpper().Substring(0) != "N" && reponseChoisie.ToUpper().Substring(0) != "O");
+          do
+          {
+            Console.Write("\tvoulez vous continuer L'ENREGISTREMENT O/N ? : ");
+            reponseChoisie = Console.ReadLine();
+          } while (reponseChoisie.ToUpper().Substring(0) != "N" && reponseChoisie.ToUpper().Substring(0) != "O");
 
 			} while (reponseChoisie.ToUpper().Substring(0) == "O");
 		}
+
+    public static Etudiant VerificationNumeroEtudiant(int numeroEtudiant)
+		{
+
+			foreach (Etudiant etudiant in ListEtudiants)
+			{
+				if (etudiant.NumeroEtudiant == numeroEtudiant)
+				{
+					return etudiant;
+				}
+			}
+			return null;  
+    }
+      
+		public static Cours VerificationNumeroCours(int numeroCours)
+		{
+			foreach (Cours cours in ListDesCours)
+			{
+				if (cours.NumeroCours == numeroCours)
+				{
+					return cours;
+				}
+			}
+			return null;
 		}
+	  
 	}
 }
