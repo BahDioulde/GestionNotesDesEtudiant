@@ -17,7 +17,7 @@ namespace ProjetFinalAssuranceQualite
 		{
 			this.LaNote = laNote;
 			this.NumeroEtudiant = etudiant.NumeroEtudiant;
-			this.NumeroCours = cours.NumeroCours;
+			this.NumeroCours = cours.NumeroCours ;
 		}
 
 		public override string ToString()
