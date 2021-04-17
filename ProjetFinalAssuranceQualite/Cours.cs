@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetFinalAssuranceQualite
 {
-	class Cours
+	public class Cours
 	{
 		
       private static int codeIncrement;
