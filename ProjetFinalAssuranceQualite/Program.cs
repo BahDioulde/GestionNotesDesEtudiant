@@ -134,6 +134,8 @@ namespace ProjetFinalAssuranceQualite
 				Thread.Sleep(3200);
 				EnregistrerCours();
 			}
+
+		
 			Console.Clear();
 			Console.WriteLine("\n\tEnregistrement des Notes des Etudiants");
 			do
@@ -187,6 +189,20 @@ namespace ProjetFinalAssuranceQualite
 				} while (reponseChoisie.ToUpper().Substring(0) != "N" && reponseChoisie.ToUpper().Substring(0) != "O");
 
 			} while (reponseChoisie.ToUpper().Substring(0) == "O");
+          
+		}
+  
+  
+    public static void AfficherReleveDeNote()
+		{
+				Console.Clear();
+				Console.Write("\tENTREZ UN NUMERO D'ETUDIANT A RECHERCHER :");
+				int numeroRechercher = VerifierLaSaisieEntier();
+				Console.WriteLine("*****Le Releve de Note*****");
+				Note.RechercheNoteEtudiant(numeroRechercher);
+				Console.WriteLine("\n\tMoyenne : " + Note.CalculerMoyenne());
+				Console.WriteLine("\tGrade : " + Note.AttribuerGrade());
+
 		}
 	}
 }
