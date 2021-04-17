@@ -179,7 +179,6 @@ namespace ProjetFinalAssuranceQualite
 					}
 				} while (!verifier);
 
-
 				Note note = new Note(VerificationNumeroEtudiant(numeroEtudiant), VerificationNumeroCours(numeroCours), laNote);
 				ListeNotesEtudiant.Add(note);
 				do
@@ -191,8 +190,7 @@ namespace ProjetFinalAssuranceQualite
 			} while (reponseChoisie.ToUpper().Substring(0) == "O");
 		}        
 	}
-  
-  
+    
     public static void AfficherReleveDeNote()
 		{
 				Console.Clear();
@@ -204,7 +202,6 @@ namespace ProjetFinalAssuranceQualite
 				Console.WriteLine("\tGrade : " + Note.AttribuerGrade());
 
 		}
-
   public static void EnregistrerCours()
 		{
 			string reponseChoisie = "O";
@@ -232,6 +229,46 @@ namespace ProjetFinalAssuranceQualite
 
 			} while (reponseChoisie.ToUpper().Substring(0) == "O");
 		}
+		
+static void Main(string[] args)
+		{
+			string reponse;
+			do
+			{
+				Menu();
+				switch (choixDuMenu)
+				{
+					case 1:
+						EnregistrerEtudiant();
+						break;
+					case 2:
+						EnregistrerCours();
+						break;
+					case 3:
+						EnregistrementDesNotes();
+						break;
+					case 4:
+						Etudiant.AfficherListeEtudiant(ListEtudiants);
+						break;
+					case 5:
+						AfficherReleveDeNote();
+						break;
+					default:
+						break;
+				}
+				while (choixDuMenu < 1 || choixDuMenu > 5)
+				{
+					Console.Write("\tERREUR DE CHOIX! Veuillez entrer un chiffre compris entre 1 à 5 : ");
+					choixDuMenu = VerifierLaSaisieEntier();
+				}
 
+				do
+				{
+					Console.Write("\tVoulez-vous une autre fonctionnalite O/N ? : ");
+					reponse = Console.ReadLine();
+				} while (reponse.ToUpper().Substring(0) != "N" && reponse.ToUpper().Substring(0) != "O");
+
+			} while (reponse.ToUpper().Substring(0) == "O");
+    }
 	}
 }
