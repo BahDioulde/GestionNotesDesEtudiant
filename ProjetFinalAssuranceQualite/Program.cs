@@ -1,15 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace ProjetFinalAssuranceQualite
 {
-  public class Program
+	public class Program
 	{
-  	static Etudiant etudiant;
-		public static List<Etudiant> ListEtudiants = new List<Etudiant>();
+		static Etudiant etudiant;
+	    public static List<Etudiant> ListEtudiants = new List<Etudiant>();
 		public static List<Note> ListeNotesEtudiant = new List<Note>();
 		public static List<Cours> ListDesCours = new List<Cours>();
 		static int choixDuMenu;
@@ -19,7 +17,7 @@ namespace ProjetFinalAssuranceQualite
 		{
 			do
 			{
-				int ValeurDeSortie = 0;
+				int ValeurDeSortie;
 				string valSaisi = Console.ReadLine();
 				if (int.TryParse(valSaisi, out ValeurDeSortie))
 				{
@@ -27,54 +25,41 @@ namespace ProjetFinalAssuranceQualite
 				}
 				else
 				{
-					Console.ReadKey();
 					Console.Write("\tVous devez saisir un nombre : ");
 					Thread.Sleep(2000);
 					return 0;
 				}
 			} while (VerifierLaSaisieEntier() == 0);
-
+			
 		}
 
-    public static void Menu()
-    {
-        Console.Clear();
-        Console.WriteLine("1. Gestion des etudiants ");
-        Console.WriteLine("2. Enregistrement Cours");
-        Console.WriteLine("3. Enregistrement Notes");
-        Console.WriteLine("4. Afficher Etudiants ");
-        Console.WriteLine("5. Rechercher un releve");
-        do
-        {
-          choixDuMenu = VerifierLaSaisieEntier();
-        } while (choixDuMenu < 1);
-    }
-    
-	  public static void EnregistrerEtudiant()
+		public static void Menu()
 		{
+				Console.Clear();
+				Console.WriteLine("1. Gestion des etudiants ");	
+				Console.WriteLine("2. Enregistrement Cours");
+				Console.WriteLine("3. Enregistrement Notes");
+				Console.WriteLine("4. Afficher Etudiants ");
+				Console.WriteLine("5. Rechercher un releve");
+			do
+			{
+				choixDuMenu = VerifierLaSaisieEntier();
+			} while (choixDuMenu < 1);
 			
+		}
+
+		public static void EnregistrerEtudiant()
+		{	
 			string reponseChoisie = "O";
 			int numeroEtudiant;
 			do
 			{
-			  Console.Clear();
-			  Console.WriteLine("1. Gestion des etudiants ");
-			  Console.WriteLine("2. Enregistrement Cours");
-			  Console.WriteLine("3. Enregistrement Notes");
-			  Console.WriteLine("4. Afficher Etudiants ");
-			  Console.WriteLine("5. Rechercher un releve");
-			  do
-			  {
-			    choixDuMenu = VerifierLaSaisieEntier();
-			  } while (choixDuMenu < 1);
-			}	
-
-		   	Console.Clear();
-                Console.WriteLine("\t***** Inscription des etudiants *****");
+					Console.Clear();
+				Console.WriteLine("\t***** Inscription des etudiants *****");
 				Console.Write("\n\tNumero de l'etudiant : ");
-				numeroEtudiant = VerifierLaSaisieEntier();
+					numeroEtudiant = VerifierLaSaisieEntier();
 				if (numeroEtudiant < 1)
-					continue;
+					continue;	
 				Console.Write("\tNom de l'etudiant : ");
 				string nomEtudiant = Console.ReadLine();
 				Console.Write("\tPrenom de l'etudiant : ");
@@ -82,18 +67,18 @@ namespace ProjetFinalAssuranceQualite
 
 				etudiant = new Etudiant(numeroEtudiant, nomEtudiant, prenomEtudiant);
 				ListEtudiants.Add(etudiant);
-          do
-          {
-            Console.Write("\tvoulez vous continuer L'ENREGISTREMENT O/N ? : ");
-            reponseChoisie = Console.ReadLine();
-          } while (reponseChoisie.ToUpper().Substring(0) != "N" && reponseChoisie.ToUpper().Substring(0) != "O");
-
+				do
+				{
+					Console.Write("\tvoulez vous continuer L'ENREGISTREMENT O/N ? : ");
+					reponseChoisie = Console.ReadLine();
+				} while (reponseChoisie.ToUpper().Substring(0,1) != "N" && reponseChoisie.ToUpper().Substring(0,1) != "O");
+				
 			} while (reponseChoisie.ToUpper().Substring(0) == "O");
 		}
 
-    public static Etudiant VerificationNumeroEtudiant(int numeroEtudiant)
-		{
 
+		public static Etudiant VerificationNumeroEtudiant(int numeroEtudiant)
+		{
 			foreach (Etudiant etudiant in ListEtudiants)
 			{
 				if (etudiant.NumeroEtudiant == numeroEtudiant)
@@ -101,9 +86,10 @@ namespace ProjetFinalAssuranceQualite
 					return etudiant;
 				}
 			}
-			return null;  
-    }
-      
+			return null;
+		}
+
+
 		public static Cours VerificationNumeroCours(int numeroCours)
 		{
 			foreach (Cours cours in ListDesCours)
@@ -115,9 +101,10 @@ namespace ProjetFinalAssuranceQualite
 			}
 			return null;
 		}
-	
-  	  public static void EnregistrementDesNotes()
-		  {
+
+
+		public static void EnregistrementDesNotes()
+		{
 			Console.Clear();
 			string reponseChoisie = "N";
 			int numeroEtudiant, numeroCours;
@@ -134,8 +121,6 @@ namespace ProjetFinalAssuranceQualite
 				Thread.Sleep(3200);
 				EnregistrerCours();
 			}
-
-		
 			Console.Clear();
 			Console.WriteLine("\n\tEnregistrement des Notes des Etudiants");
 			do
@@ -143,12 +128,12 @@ namespace ProjetFinalAssuranceQualite
 				do
 				{
 					Console.Write("\n\tNumero Etudiant : ");
-					numeroEtudiant = VerifierLaSaisieEntier();
+					 numeroEtudiant = VerifierLaSaisieEntier();
 					if (numeroEtudiant < 1)
 						continue;
 					if (VerificationNumeroEtudiant(numeroEtudiant) == null)
 						Console.WriteLine("\tetudiant introuvable\n");
-				} while (VerificationNumeroEtudiant(numeroEtudiant) == null);
+				}while (VerificationNumeroEtudiant(numeroEtudiant) == null);
 
 				do
 				{
@@ -158,26 +143,27 @@ namespace ProjetFinalAssuranceQualite
 						continue;
 					if (VerificationNumeroCours(numeroCours) == null)
 						Console.Write("\tCours introuvable\n");
-				} while (VerificationNumeroCours(numeroCours) == null);
+				} while (VerificationNumeroCours(numeroCours)== null);
 
 				Console.Write("\n\tSaire la note : ");
 
 				bool verifier;
-				double laNote = 0.0;
-
+				double laNote = 0.0 ;
+				
 				do
 				{
 					verifier = true;
 					try
 					{
-						laNote = double.Parse(Console.ReadLine());
+						 laNote =double.Parse(Console.ReadLine());
 					}
 					catch (FormatException)
 					{
 						Console.Write("\tErreur! Vous devez saisir un nombre : ");
-						verifier = false;
+						verifier = false;	
 					}
 				} while (!verifier);
+				
 
 				Note note = new Note(VerificationNumeroEtudiant(numeroEtudiant), VerificationNumeroCours(numeroCours), laNote);
 				ListeNotesEtudiant.Add(note);
@@ -188,38 +174,42 @@ namespace ProjetFinalAssuranceQualite
 				} while (reponseChoisie.ToUpper().Substring(0) != "N" && reponseChoisie.ToUpper().Substring(0) != "O");
 
 			} while (reponseChoisie.ToUpper().Substring(0) == "O");
-		}        
-	}
-    
-    public static void AfficherReleveDeNote()
+		}
+
+		
+
+		public static void AfficherReleveDeNote()
 		{
-				Console.Clear();
-				Console.Write("\tENTREZ UN NUMERO D'ETUDIANT A RECHERCHER :");
-				int numeroRechercher = VerifierLaSaisieEntier();
-				Console.WriteLine("*****Le Releve de Note*****");
-				Note.RechercheNoteEtudiant(numeroRechercher);
-				Console.WriteLine("\n\tMoyenne : " + Note.CalculerMoyenne());
-				Console.WriteLine("\tGrade : " + Note.AttribuerGrade());
+			Console.Clear();
+			Console.Write("\tENTREZ UN NUMERO D'ETUDIANT A RECHERCHER :");
+			int numeroRechercher = VerifierLaSaisieEntier();
+			Console.WriteLine("*****Le Releve de Note*****");
+			Note.RechercheNoteEtudiant(numeroRechercher);
+			Console.WriteLine("\n\tMoyenne : "+Note.CalculerMoyenne());
+			Console.WriteLine("\tGrade : " + Note.AttribuerGrade());
 
 		}
-  public static void EnregistrerCours()
+		 
+		public static void EnregistrerCours()
 		{
 			string reponseChoisie = "O";
 			do
 			{
 				Console.Clear();
-                Console.WriteLine("\t***** Enregistrement des cours dispenses en classe *****\n");
+				Console.WriteLine("\t*****Enregistrement des Cours dispenses en Classe *****\n");
 				Console.Write("\tNumero du Cours : ");
 				int numcours = VerifierLaSaisieEntier();
 				if (numcours == 0)
 				{
 					Thread.Sleep(2000);
 					continue;
-				}
+				}	
 				Console.Write("\tTitre du Cours : ");
 				string nomTitre = Console.ReadLine();
 				cours = new Cours(numcours, nomTitre);
-				ListDesCours.Add(cours);
+				ListDesCours.Add(cours);	
+
+				
 
 				do
 				{
@@ -229,8 +219,8 @@ namespace ProjetFinalAssuranceQualite
 
 			} while (reponseChoisie.ToUpper().Substring(0) == "O");
 		}
-		
-static void Main(string[] args)
+
+		static void Main(string[] args)
 		{
 			string reponse;
 			do
@@ -238,8 +228,7 @@ static void Main(string[] args)
 				Menu();
 				switch (choixDuMenu)
 				{
-					case 1:
-						EnregistrerEtudiant();
+					case 1:  EnregistrerEtudiant();
 						break;
 					case 2:
 						EnregistrerCours();
@@ -262,13 +251,14 @@ static void Main(string[] args)
 					choixDuMenu = VerifierLaSaisieEntier();
 				}
 
-				do
-				{
+					do
+					{
 					Console.Write("\tVoulez-vous une autre fonctionnalite O/N ? : ");
-					reponse = Console.ReadLine();
-				} while (reponse.ToUpper().Substring(0) != "N" && reponse.ToUpper().Substring(0) != "O");
+						reponse = Console.ReadLine();
+					} while (reponse.ToUpper().Substring(0) != "N" && reponse.ToUpper().Substring(0) != "O");
 
-			} while (reponse.ToUpper().Substring(0) == "O");
-    }
+				} while (reponse.ToUpper().Substring(0) == "O");
+
+		}
 	}
 }
