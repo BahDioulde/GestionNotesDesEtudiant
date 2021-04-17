@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetFinalAssuranceQualite
 {
-	class Note
+    public class Note
 	{
 		public int NumeroEtudiant { get; set; }
 		public int NumeroCours { get; set; }
