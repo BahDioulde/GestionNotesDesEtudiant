@@ -24,6 +24,20 @@ namespace ProjetFinalAssuranceQualite
 			} while (choixDuMenu < 1);
 
 			}
+			
+			public static void AfficherReleveDeNote()
+			{
+				Console.Clear();
+				Console.Write("\tENTREZ UN NUMERO D'ETUDIANT A RECHERCHER :");
+				int numeroRechercher = VerifierLaSaisieEntier();
+				Console.WriteLine("*****Le Releve de Note*****");
+				Note.RechercheNoteEtudiant(numeroRechercher);
+				Console.WriteLine("\n\tMoyenne : " + Note.CalculerMoyenne());
+				Console.WriteLine("\tGrade : " + Note.AttribuerGrade());
+
+			}
+
+			
 		}
 	}
 }
