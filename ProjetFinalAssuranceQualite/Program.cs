@@ -115,9 +115,9 @@ namespace ProjetFinalAssuranceQualite
 			}
 			return null;
 		}
-	  
-  			public static void EnregistrementDesNotes()
-		{
+	
+  	  public static void EnregistrementDesNotes()
+		  {
 			Console.Clear();
 			string reponseChoisie = "N";
 			int numeroEtudiant, numeroCours;
@@ -189,8 +189,8 @@ namespace ProjetFinalAssuranceQualite
 				} while (reponseChoisie.ToUpper().Substring(0) != "N" && reponseChoisie.ToUpper().Substring(0) != "O");
 
 			} while (reponseChoisie.ToUpper().Substring(0) == "O");
-          
-		}
+		}        
+	}
   
   
     public static void AfficherReleveDeNote()
@@ -204,5 +204,34 @@ namespace ProjetFinalAssuranceQualite
 				Console.WriteLine("\tGrade : " + Note.AttribuerGrade());
 
 		}
+
+  public static void EnregistrerCours()
+		{
+			string reponseChoisie = "O";
+			do
+			{
+				Console.Clear();
+                Console.WriteLine("\t***** Enregistrement des cours dispenses en classe *****\n");
+				Console.Write("\tNumero du Cours : ");
+				int numcours = VerifierLaSaisieEntier();
+				if (numcours == 0)
+				{
+					Thread.Sleep(2000);
+					continue;
+				}
+				Console.Write("\tTitre du Cours : ");
+				string nomTitre = Console.ReadLine();
+				cours = new Cours(numcours, nomTitre);
+				ListDesCours.Add(cours);
+
+				do
+				{
+					Console.Write("\tVoulez-vous continuer l'enregistrement O/N ? : ");
+					reponseChoisie = Console.ReadLine();
+				} while (reponseChoisie.ToUpper().Substring(0) != "N" && reponseChoisie.ToUpper().Substring(0) != "O");
+
+			} while (reponseChoisie.ToUpper().Substring(0) == "O");
+		}
+
 	}
 }
