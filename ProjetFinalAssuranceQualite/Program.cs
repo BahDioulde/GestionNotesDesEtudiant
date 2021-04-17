@@ -57,7 +57,19 @@ namespace ProjetFinalAssuranceQualite
 			int numeroEtudiant;
 			do
 			{
-				Console.Clear();
+			  Console.Clear();
+			  Console.WriteLine("1. Gestion des etudiants ");
+			  Console.WriteLine("2. Enregistrement Cours");
+			  Console.WriteLine("3. Enregistrement Notes");
+			  Console.WriteLine("4. Afficher Etudiants ");
+			  Console.WriteLine("5. Rechercher un releve");
+			  do
+			  {
+			    choixDuMenu = VerifierLaSaisieEntier();
+			  } while (choixDuMenu < 1);
+			}	
+
+		   	Console.Clear();
                 Console.WriteLine("\t***** Inscription des etudiants *****");
 				Console.Write("\n\tNumero de l'etudiant : ");
 				numeroEtudiant = VerifierLaSaisieEntier();
@@ -103,9 +115,97 @@ namespace ProjetFinalAssuranceQualite
 			}
 			return null;
 		}
-	  
-	  
-	  public static void EnregistrerCours()
+	
+  	  public static void EnregistrementDesNotes()
+		  {
+			Console.Clear();
+			string reponseChoisie = "N";
+			int numeroEtudiant, numeroCours;
+			if (ListEtudiants.Count < 1)
+			{
+				Console.WriteLine("\n\tVous n'avez aucun etudiant inscrit!!! pensez a enregistrer vos etudiant");
+				Thread.Sleep(3200);
+				EnregistrerEtudiant();
+			}
+
+			if (ListDesCours.Count < 1)
+			{
+				Console.WriteLine("\n\tVous n'avez aucun cours inscrit!!! pensez a enregistrer les cours dispensés dans votre école ");
+				Thread.Sleep(3200);
+				EnregistrerCours();
+			}
+
+		
+			Console.Clear();
+			Console.WriteLine("\n\tEnregistrement des Notes des Etudiants");
+			do
+			{
+				do
+				{
+					Console.Write("\n\tNumero Etudiant : ");
+					numeroEtudiant = VerifierLaSaisieEntier();
+					if (numeroEtudiant < 1)
+						continue;
+					if (VerificationNumeroEtudiant(numeroEtudiant) == null)
+						Console.WriteLine("\tetudiant introuvable\n");
+				} while (VerificationNumeroEtudiant(numeroEtudiant) == null);
+
+				do
+				{
+					Console.Write("\n\tNumero Cours : ");
+					numeroCours = VerifierLaSaisieEntier();
+					if (numeroCours < 1)
+						continue;
+					if (VerificationNumeroCours(numeroCours) == null)
+						Console.Write("\tCours introuvable\n");
+				} while (VerificationNumeroCours(numeroCours) == null);
+
+				Console.Write("\n\tSaire la note : ");
+
+				bool verifier;
+				double laNote = 0.0;
+
+				do
+				{
+					verifier = true;
+					try
+					{
+						laNote = double.Parse(Console.ReadLine());
+					}
+					catch (FormatException)
+					{
+						Console.Write("\tErreur! Vous devez saisir un nombre : ");
+						verifier = false;
+					}
+				} while (!verifier);
+
+
+				Note note = new Note(VerificationNumeroEtudiant(numeroEtudiant), VerificationNumeroCours(numeroCours), laNote);
+				ListeNotesEtudiant.Add(note);
+				do
+				{
+					Console.Write("\n\tVoulez-vous enregistrer une autre note O/N ? ");
+					reponseChoisie = Console.ReadLine();
+				} while (reponseChoisie.ToUpper().Substring(0) != "N" && reponseChoisie.ToUpper().Substring(0) != "O");
+
+			} while (reponseChoisie.ToUpper().Substring(0) == "O");
+		}        
+	}
+  
+  
+    public static void AfficherReleveDeNote()
+		{
+				Console.Clear();
+				Console.Write("\tENTREZ UN NUMERO D'ETUDIANT A RECHERCHER :");
+				int numeroRechercher = VerifierLaSaisieEntier();
+				Console.WriteLine("*****Le Releve de Note*****");
+				Note.RechercheNoteEtudiant(numeroRechercher);
+				Console.WriteLine("\n\tMoyenne : " + Note.CalculerMoyenne());
+				Console.WriteLine("\tGrade : " + Note.AttribuerGrade());
+
+		}
+
+  public static void EnregistrerCours()
 		{
 			string reponseChoisie = "O";
 			do
@@ -132,6 +232,6 @@ namespace ProjetFinalAssuranceQualite
 
 			} while (reponseChoisie.ToUpper().Substring(0) == "O");
 		}
-	  
+
 	}
 }
